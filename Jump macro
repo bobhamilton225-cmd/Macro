@@ -1,0 +1,41 @@
+import time
+import keyboard
+import tkinter as tk
+import threading
+
+
+running = False
+root = tk.Tk()
+root.title("Roblox Script?")
+root.geometry("300x200")
+
+
+
+label = tk.Label(root, text = "Button?")
+label.place(x = 110, y = 40)
+
+
+def key_loop():
+    global running
+    while True:
+        if running:
+            keyboard.press_and_release('space')
+            time.sleep(0.02)
+        else:
+            time.sleep(0.1)
+
+def toggle():
+    global running
+    running = not running
+    button.config(
+        text="Stop" if running else "start",
+                   bg="red" if running else "green"
+                   )
+
+button = tk.Button(root, text="Start", bg="green", command=toggle)
+button.pack(pady=60)
+
+thread = threading.Thread(target=key_loop, daemon=True)
+thread.start()
+
+root.mainloop() 
